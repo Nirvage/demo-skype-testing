@@ -19,13 +19,13 @@ export class QuestionDialog {
         let answers: any[] = [];
         let select: string[] = [];
 
-        for(let criterion in this.result.guide.filters[this.result.filterIndex].criterions){
+        for(let criterion in this.session.userData.guide.filters[this.session.userData.filterIndex].criterions){
 
             answers.push(
-                builder.CardAction.imBack(
+                builder.CardAction.postBack(
                     this.session, 
                     criterion, 
-                    this.result.guide.filters[this.result.filterIndex].criterions[criterion].name
+                    this.session.userData.guide.filters[this.session.userData.filterIndex].criterions[criterion].name
                 )
             );
 
@@ -36,7 +36,7 @@ export class QuestionDialog {
             .textFormat(builder.TextFormat.xml)
             .attachments([
                 new builder.HeroCard(this.session)
-                    .text(this.result.guide.filters[this.result.filterIndex].name)
+                    .text(this.session.userData.guide.filters[this.session.userData.filterIndex].name)
                     .buttons(answers)
             ]);
 
@@ -52,8 +52,8 @@ export class QuestionDialog {
     }
 
     getResponse(){
-        console.log(this.result);
-        this.session.endDialog('oui vous avez choisi : ' + this.result.response);
+        console.log(this.session.userData);
+        this.session.endDialog('oui vous avez choisi : ' + this.result.response.index);
     }
 
 }
