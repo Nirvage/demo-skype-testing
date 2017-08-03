@@ -9,7 +9,13 @@ var GuideDialog = (function () {
         this.guideService = new guide_service_1.GuideService();
     }
     GuideDialog.prototype.getGuide = function () {
-        this.guideService.getGuides().then(function (guides) { return console.log(guides); });
+        var _this = this;
+        this.guideService.getGuides(this.result)
+            .then(function (data) {
+            _this.session.send("J'ai trouvé ce guide pour vous aider a choisir : " + data[0].name);
+            // Dailogue guide
+        })
+            .catch(function (err) { return console.log(err); });
     };
     return GuideDialog;
 }());

@@ -19,16 +19,18 @@ export class StartDialog {
     }
 
     userResponse(){
-        // let app = apiai(process.env.APIAI_CLIENT_ACCESS_TOKEN || "");
+        let section: string;
 
-        // console.log(this.result);
+        let app = apiai(process.env.APIAI_CLIENT_ACCESS_TOKEN || "");
 
-        // app.textRequest(this.result.response, { 
-        //     sessionId: '110e8400-e29b-11d4-a716-446655440000'
-        // })
-        // .on('response', (resp) => console.log(resp)).end();
+        app.textRequest(this.result.response, { 
+            sessionId: '110e8400-e29b-11d4-a716-446655440000'
+        })
+        .on('response', (resp) => null )
+        .on('error', (err) => console.log(app))
+        .end();
 
-        let section = '004007000';
+        section = '004007000';
 
         this.session.beginDialog('/guide', section);
 

@@ -33,10 +33,10 @@ var ActivityEvents = (function () {
     };
     ActivityEvents.prototype.contactRelationUpdate = function (message, bot) {
         if (message.action === 'add') {
-            var name_1 = message.user ? message.user.name : null;
+            var name = message.user ? message.user.name : null;
             var reply = new builder.Message()
                 .address(message.address)
-                .text("Hello %s... Thanks for adding me. Say 'hello' to see some great demos.", name_1 || 'there');
+                .text("Hello %s... Thanks for adding me. Say 'hello' to see some great demos.", name || 'there');
             bot.send(reply);
         }
         else {

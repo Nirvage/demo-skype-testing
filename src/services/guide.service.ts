@@ -1,31 +1,28 @@
 import * as http from 'http';
-import * as promise from 'promise';
+var Client = require('node-rest-client').Client;
 
 export class GuideService {
 
+    private optionsProxy = {
+        proxy: {
+            host: process.env.PROXY_IP,
+            port: process.env.PROXY_PORT,
+            user: process.env.PROXY_USERNAME,
+            password: process.env.PROXY_PASSWORD,
+            tunnel: false
+        }
+    };
 
     constructor() {
     }
 
-    getGuides(){
-        return new promise(
-            (resolve: any) => {
-                // http.get(process.env.API_GUIDE_URL + '/guides').on("data", (data) => {
-                //     console.log(data)
-                //     resolve(data);
-                // }).end();
-               
-               http.request({
-                   hostname: process.env.API_GUIDE_URL,
-                   path: '/guides',
-                   method: 'GET'
-               })
-               .on('data', (chunk: any) => {
-                   resolve(chunk);
-               })
-               .end();
-            }
-        )
+    getGuides(section: string): Promise<any>{
+
+        let client = new Client();
+
+        const get = () => new Promise(resolve => client.get(process.env.API_GUIDE_URL+'/guides/filter?section='+ encodeURI(section), {}, resolve));
+
+        return get();
                
     }
 
