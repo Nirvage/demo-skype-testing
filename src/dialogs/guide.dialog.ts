@@ -22,7 +22,12 @@ export class GuideDialog {
             this.session.send("J'ai trouvé ce guide pour vous aider a choisir : " + data[0].name)
 
             // Dailogue guide
+
+            this.session.endDialog('Bref, ça marche.');
         })
-        .catch(err => console.log(err));
+        .catch((err: Error) => {
+            console.error(err);
+            this.session.endConversation('Oups, on dirait qu\'il y a eu un petit problème...');
+        });
     }
 }

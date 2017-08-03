@@ -20,20 +20,36 @@ export class StartDialog {
     }
 
     userResponse(){
-        let section: string;
-
         let app = apiai(process.env.APIAI_CLIENT_ACCESS_TOKEN || "");
 
         app.textRequest(this.result.response, { 
             sessionId: uuid()
         })
-        .on('response', (resp: any) => console.log(resp.result.parameters['guide-category']))
-        .on('error', (err) => console.log(err))
+        .on('response', (resp: any) => {
+
+            switch(resp.result.action) {
+
+                case "askingGuide": {
+                    let section: string = resp.result.parameters['guide-catagory'];
+                    this.session.beginDialog('/guide', section);
+                }
+                break;
+
+                case "searchProduct": {
+                    // TODO
+                }
+                break;
+
+                default:
+                    this.session.endDialog('Désolé, je ne comprends pas vraiment ce que vous me demandez...')
+            }
+
+        })
+        .on('error', (err: Error) => {
+            console.error(err);
+            this.session.endConversation('Oups, on dirait qu\'il y a eu un petit problème...');
+        })
         .end();
-
-        section = '004007000';
-
-        this.session.beginDialog('/guide', section);
 
     }
 }
