@@ -1,7 +1,7 @@
 import * as restify from 'restify';
 import * as builder from 'botbuilder';
 
-export class ConversationDialog {
+export class QuestionDialog {
 
     private session: builder.Session;
     private result: any;
@@ -17,16 +17,19 @@ export class ConversationDialog {
         console.log(this.result);
 
         let answers: any[] = [];
+        let select: string[] = [];
 
         for(let criterion in this.result.guide.filters[this.result.filterIndex].criterions){
 
             answers.push(
-                builder.CardAction.messageBack(
+                builder.CardAction.imBack(
                     this.session, 
                     criterion, 
                     this.result.guide.filters[this.result.filterIndex].criterions[criterion].name
                 )
             );
+
+            select.push(criterion);
         }
 
         let msg = new builder.Message(this.session)
@@ -45,7 +48,12 @@ export class ConversationDialog {
         //                 answers
         //             ));
 
-        this.session.send(msg);
+        builder.Prompts.choice(this.session, msg, select);
+    }
+
+    getResponse(){
+        console.log(this.result);
+        this.session.endDialog('oui vous avez choisi : ' + this.result.response);
     }
 
 }

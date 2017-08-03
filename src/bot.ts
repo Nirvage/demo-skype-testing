@@ -4,7 +4,7 @@ import { ActivityEvents } from "./activity-events";
 import { RootDialog } from "./dialogs/root.dialog";
 import { StartDialog } from "./dialogs/start.dialog";
 import { GuideDialog } from "./dialogs/guide.dialog";
-import { ConversationDialog } from "./dialogs/conversation.dialog";
+import { QuestionDialog } from "./dialogs/question.dialog";
 
 export class Bot {
 
@@ -35,9 +35,11 @@ export class Bot {
         this.bot.dialog('/guide', [
             (session, args, next) => new GuideDialog(session, args, next).getGuide()
         ]);
-        this.bot.dialog('/conv', [
-            (session, result) => new ConversationDialog(session, result).doQuestion()
-        ])
+        this.bot.dialog('/question', [
+            (session, result) => new QuestionDialog(session, result).doQuestion(),
+            (session, result) => new QuestionDialog(session, result).getResponse()
+        ]);
+
     }
 
     setupRestifyServer(){
