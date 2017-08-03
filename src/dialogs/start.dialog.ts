@@ -27,7 +27,7 @@ export class StartDialog {
         app.textRequest(this.result.response, { 
             sessionId: uuid()
         })
-        .on('response', (resp: any) => console.log(resp) )
+        .on('response', (resp: any) => console.log(resp.result.parameters['guide-category']))
         .on('error', (err) => console.log(err))
         .end();
 
