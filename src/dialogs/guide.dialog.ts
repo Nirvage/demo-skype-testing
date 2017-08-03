@@ -19,14 +19,18 @@ export class GuideDialog {
     getGuide(){
 
         this.guideService.getGuides(this.result)
-        .then((data) => {
-            console.log(data);
+        .then((data: any[]) => {
 
-            this.session.send("J'ai trouvé ce guide pour vous aider a choisir : " + data[0].name)
+            if(data.length>0) {
+                console.log(data);
+                this.session.send("J'ai trouvé ce guide pour vous aider a choisir : " + data[0].name)
 
-            // Dailogue guide
+                // Dailogue guide
 
-            this.session.endDialog('Bref, ça marche.');
+                this.session.endDialog('Bref, ça marche.');
+            } else {
+                this.session.endDialog('Je n\'ai pas trouvé de guide concernant votre demande...');
+            }
         })
         .catch((err: Error) => {
             console.error(err);
