@@ -1,6 +1,7 @@
 import * as restify from 'restify';
 import * as builder from 'botbuilder';
 import * as apiai from 'apiai';
+var uuid = require('uuid/v1');
 
 export class StartDialog {
 
@@ -24,9 +25,9 @@ export class StartDialog {
         let app = apiai(process.env.APIAI_CLIENT_ACCESS_TOKEN || "");
 
         app.textRequest(this.result.response, { 
-            sessionId: '110e8400-e29b-11d4-a716-446655440000'
+            sessionId: uuid()
         })
-        .on('response', (resp) => console.log(resp) )
+        .on('response', (resp) => console.log('uuid : ' + resp.sessionId) )
         .on('error', (err) => console.log(err))
         .end();
 
