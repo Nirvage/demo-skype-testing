@@ -26,8 +26,8 @@ export class StartDialog {
         app.textRequest(this.result.response, { 
             sessionId: '110e8400-e29b-11d4-a716-446655440000'
         })
-        .on('response', (resp) => null )
-        .on('error', (err) => console.log(app))
+        .on('response', (resp) => console.log(resp) )
+        .on('error', (err) => console.log(err))
         .end();
 
         section = '004007000';
