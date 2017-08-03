@@ -19,13 +19,13 @@ export class QuestionDialog {
         let answers: any[] = [];
         let select: string[] = [];
 
-        for(let criterion in this.session.userData.guide.filters[this.session.userData.filterIndex].criterions){
+        for(let criterion in this.session.userData.guide.filters[this.session.userData.currentFilter].criterions){
 
             answers.push(
                 builder.CardAction.postBack(
                     this.session, 
                     criterion, 
-                    this.session.userData.guide.filters[this.session.userData.filterIndex].criterions[criterion].name
+                    this.session.userData.guide.filters[this.session.userData.currentFilter].criterions[criterion].name
                 )
             );
 
@@ -36,7 +36,7 @@ export class QuestionDialog {
             .textFormat(builder.TextFormat.xml)
             .attachments([
                 new builder.HeroCard(this.session)
-                    .text(this.session.userData.guide.filters[this.session.userData.filterIndex].name)
+                    .text(this.session.userData.guide.filters[this.session.userData.currentFilter].name)
                     .buttons(answers)
             ]);
 
@@ -53,7 +53,23 @@ export class QuestionDialog {
 
     getResponse(){
         console.log(this.session.userData);
-        this.session.endDialog('oui vous avez choisi : ' + this.result.response.index);
+
+        if (this.result.response.index < this.session.userData.guide.filters.length && this.result.response.index >= 0){
+
+            this.session.userData.criterions.push(
+                this.session.userData.guide.filters[this.session.userData.currentFilter].criterions[this.result.response.index]
+            );
+
+            this.session.userData.currentFilter ++;
+        } else {
+            this.session.send('Votre réponse ne correspond à aucun des choix proposés, veuillez sélectionner une réponse valide.');
+        }
+
+        if( this.session.userData.currentFilter < this.session.userData.guide.filters.length ){
+            this.session.replaceDialog('/question');
+        } else {
+            this.session.send('vous avez répondu a toute les questions.').endDialog();
+        }
     }
 
 }

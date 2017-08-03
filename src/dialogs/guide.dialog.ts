@@ -25,7 +25,7 @@ export class GuideDialog {
                 console.log(data);
                 this.session.send("J'ai trouvé ce guide pour vous aider a choisir : " + data[0].name)
                 
-                this.session.userData = {guide: data[0], filterIndex: 0};
+                this.session.userData = {guide: data[0], currentFilter: 0, criterions: []};
                 // Dailogue guide
                 this.session.beginDialog('/question');
             } else {
