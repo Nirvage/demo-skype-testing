@@ -17,10 +17,10 @@ export class GuideDialog {
     }
 
     getGuide(){
-        console.log(this.result);
+        
         this.guideService.getGuides(this.result)
         .then((data) => {
-            console.log(data);
+
             this.session.send("J'ai trouvé ce guide pour vous aider a choisir : " + data[0].name)
 
             // Dailogue guide

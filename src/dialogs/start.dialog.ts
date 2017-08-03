@@ -26,13 +26,11 @@ export class StartDialog {
             sessionId: uuid()
         })
         .on('response', (resp: any) => {
-
-            console.log(resp);
-
+            
             switch(resp.result.action) {
 
                 case "askingGuide": {
-                    let section: string = resp.result.parameters['guide-catagory'];
+                    let section: string = resp.result.parameters['guide-category'];
                     this.session.beginDialog('/guide', section);
                 }
                 break;
