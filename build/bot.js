@@ -6,6 +6,7 @@ var activity_events_1 = require("./activity-events");
 var root_dialog_1 = require("./dialogs/root.dialog");
 var start_dialog_1 = require("./dialogs/start.dialog");
 var guide_dialog_1 = require("./dialogs/guide.dialog");
+var conversation_dialog_1 = require("./dialogs/conversation.dialog");
 var Bot = (function () {
     function Bot() {
         this.setupRestifyServer();
@@ -23,6 +24,9 @@ var Bot = (function () {
         ]);
         this.bot.dialog('/guide', [
             function (session, args, next) { return new guide_dialog_1.GuideDialog(session, args, next).getGuide(); }
+        ]);
+        this.bot.dialog('/conv', [
+            function (session, result) { return new conversation_dialog_1.ConversationDialog(session, result).doQuestion(); }
         ]);
     }
     Bot.prototype.setupRestifyServer = function () {

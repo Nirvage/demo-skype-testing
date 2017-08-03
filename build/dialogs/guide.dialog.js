@@ -12,10 +12,21 @@ var GuideDialog = (function () {
         var _this = this;
         this.guideService.getGuides(this.result)
             .then(function (data) {
-            _this.session.send("J'ai trouvé ce guide pour vous aider a choisir : " + data[0].name);
-            // Dailogue guide
+            if (data.length > 0) {
+                console.log(data);
+                _this.session.send("J'ai trouvé ce guide pour vous aider a choisir : " + data[0].name);
+                // Dailogue guide
+                _this.session.beginDialog('/conv', data);
+                _this.session.endDialog();
+            }
+            else {
+                _this.session.endDialog('Je n\'ai pas trouvé de guide concernant votre demande...');
+            }
         })
-            .catch(function (err) { return console.log(err); });
+            .catch(function (err) {
+            console.error(err);
+            _this.session.endConversation('Oups, on dirait qu\'il y a eu un petit problème... (guidedialog)');
+        });
     };
     return GuideDialog;
 }());
