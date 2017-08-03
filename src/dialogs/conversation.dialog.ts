@@ -15,7 +15,29 @@ export class ConversationDialog {
 
     doQuestion(){
         console.log(this.result);
-        this.session.send(this.result.filters[0].name);
+
+        let answers: any[] = [];
+
+        for(let criterion in this.result.guide.filters[this.result.filterIndex].criterions){
+
+            answers.push(
+                builder.CardAction.messageBack(
+                    this.session, 
+                    criterion, 
+                    this.result.guide.filters[this.result.filterIndex].criterions[criterion].name
+                )
+            );
+        }
+
+        let msg = new builder.Message(this.session)
+            .text(this.result.guide.filters[this.result.filterIndex].name)
+            .suggestedActions(
+                builder.SuggestedActions.create(
+                        this.session, 
+                        answers
+                    ));
+
+        this.session.send(msg);
     }
 
 }

@@ -24,9 +24,9 @@ export class GuideDialog {
             if(data.length>0) {
                 console.log(data);
                 this.session.send("J'ai trouvé ce guide pour vous aider a choisir : " + data[0].name)
-
+                
                 // Dailogue guide
-                this.session.beginDialog('/conv', data[0]);
+                this.session.beginDialog('/conv', {guide: data[0], filterIndex: 0});
             } else {
                 this.session.endDialog('Je n\'ai pas trouvé de guide concernant votre demande...');
             }

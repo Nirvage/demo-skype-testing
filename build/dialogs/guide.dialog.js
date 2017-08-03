@@ -16,8 +16,7 @@ var GuideDialog = (function () {
                 console.log(data);
                 _this.session.send("J'ai trouvé ce guide pour vous aider a choisir : " + data[0].name);
                 // Dailogue guide
-                _this.session.beginDialog('/conv', data);
-                _this.session.endDialog();
+                _this.session.beginDialog('/conv', { guide: data[0], filterIndex: 0 });
             }
             else {
                 _this.session.endDialog('Je n\'ai pas trouvé de guide concernant votre demande...');
