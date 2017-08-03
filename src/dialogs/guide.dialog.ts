@@ -29,7 +29,7 @@ export class GuideDialog {
         })
         .catch((err: Error) => {
             console.error(err);
-            this.session.endConversation('Oups, on dirait qu\'il y a eu un petit problème...');
+            this.session.endConversation('Oups, on dirait qu\'il y a eu un petit problème... (guidedialog)');
         });
     }
 }

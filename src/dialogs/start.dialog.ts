@@ -27,6 +27,8 @@ export class StartDialog {
         })
         .on('response', (resp: any) => {
 
+            console.log(resp);
+
             switch(resp.result.action) {
 
                 case "askingGuide": {
@@ -47,7 +49,7 @@ export class StartDialog {
         })
         .on('error', (err: Error) => {
             console.error(err);
-            this.session.endConversation('Oups, on dirait qu\'il y a eu un petit problème...');
+            this.session.endConversation('Oups, on dirait qu\'il y a eu un petit problème... (startdialog)');
         })
         .end();
 
