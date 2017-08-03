@@ -1,7 +1,10 @@
 import * as restify from 'restify';
 import * as builder from 'botbuilder';
+import { ProductService } from "../services/product.service";
 
 export class QuestionDialog {
+
+    private productService: ProductService;
 
     private session: builder.Session;
     private result: any;
@@ -11,6 +14,8 @@ export class QuestionDialog {
         this.session = session;
         this.result = result || null;
         this.next = next || null;
+
+        this.productService = new ProductService();
     }
 
     doQuestion(){
@@ -68,8 +73,39 @@ export class QuestionDialog {
         if( this.session.userData.currentFilter < this.session.userData.guide.filters.length ){
             this.session.replaceDialog('/question');
         } else {
-            this.session.send('vous avez répondu a toute les questions.').endDialog();
+            this.next();
         }
+    }
+
+    displayResults(){
+        let categoryId: string = this.session.userData.guide.categoryId;
+        let criterions: any[] = this.session.userData.criterions;
+
+        this.productService.filterProducts(categoryId, criterions)
+        .then((products: any[]) => {
+            if (products.length>0) {
+
+                let cards: builder.HeroCard[] = [];
+                cards = products.map((product: any) => {
+                    return new builder.HeroCard(this.session)
+                        .title(product.name)
+                        .subtitle(product.description)
+                        .images([
+                            builder.CardImage.create(this.session, `http://assets.lyreco.com/is/image/lyrecows/2016-${product.code}?fit=constrain,1&wid=250&hei=250&fmt=jpg&locale=FR_fr`)
+                        ])
+                });
+
+                let msg = new builder.Message(this.session)
+                    .textFormat(builder.TextFormat.xml)
+                    .attachmentLayout(builder.AttachmentLayout.carousel)
+                    .attachments(cards);
+
+                this.session.send("Voici les résultats que j'ai trouvé pour vos critères de recherche :")
+                    .endDialog(msg);
+            } else {
+                this.session.endDialog("Aucun produit ne correspond à vos critères de recherche.");
+            }
+        });
     }
 
 }

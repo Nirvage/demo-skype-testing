@@ -37,7 +37,8 @@ export class Bot {
         ]);
         this.bot.dialog('/question', [
             (session, result) => new QuestionDialog(session, result).doQuestion(),
-            (session, result) => new QuestionDialog(session, result).getResponse()
+            (session, result, next) => new QuestionDialog(session, result, next).getResponse(),
+            (session, result) => new QuestionDialog(session, result).displayResults()
         ]);
 
     }
