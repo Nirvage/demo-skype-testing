@@ -27,7 +27,7 @@ export class StartDialog {
         app.textRequest(this.result.response, { 
             sessionId: uuid()
         })
-        .on('response', (resp: any) => console.log('Response :\n' + resp.json()) )
+        .on('response', (resp: any) => console.log('Response :\n' + resp.toString()) )
         .on('error', (err) => console.log(err))
         .end();
 
