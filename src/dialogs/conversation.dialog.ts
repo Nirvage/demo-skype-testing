@@ -14,6 +14,7 @@ export class ConversationDialog {
     }
 
     doQuestion(){
+        console.log(this.result);
         this.session.send(this.result.filters[0].name);
     }
 

@@ -26,8 +26,7 @@ export class GuideDialog {
                 this.session.send("J'ai trouvé ce guide pour vous aider a choisir : " + data[0].name)
 
                 // Dailogue guide
-                this.session.beginDialog('/conv' , data );
-                this.session.endDialog();
+                this.session.beginDialog('/conv', data );
             } else {
                 this.session.endDialog('Je n\'ai pas trouvé de guide concernant votre demande...');
             }
