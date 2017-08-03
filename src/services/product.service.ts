@@ -5,14 +5,14 @@ export class ProductService {
     constructor() {
     }
 
-    getProducts(categoryId: string): Promise<any[]>{
+    getProducts(categoryId: string): Promise<any>{
         let client = new Client();
-        const get = () => new Promise(resolve => client.get(process.env.API_GUIDE_URL+'/products/filter?section='+ encodeURI(categoryId), {}, resolve));
+        const get = () => new Promise(resolve => client.get(process.env.API_GUIDE_URL+'/products/filter?categoryId='+ encodeURI(categoryId), {}, resolve));
 
         return get();
     }
 
-    filterProducts(categoryId: string, criterions: any[]): Promise<any[]> {
+    filterProducts(categoryId: string, criterions: any[]): Promise<any> {
         return this.getProducts(categoryId)
         .then((products: any[]) => {
             let selectedAttributes: any[] = [];
