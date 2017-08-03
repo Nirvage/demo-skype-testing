@@ -30,12 +30,20 @@ export class ConversationDialog {
         }
 
         let msg = new builder.Message(this.session)
-            .text(this.result.guide.filters[this.result.filterIndex].name)
-            .suggestedActions(
-                builder.SuggestedActions.create(
-                        this.session, 
-                        answers
-                    ));
+            .textFormat(builder.TextFormat.xml)
+            .attachments([
+                new builder.HeroCard(this.session)
+                    .text(this.result.guide.filters[this.result.filterIndex].name)
+                    .buttons(answers)
+            ]);
+
+        // let msg = new builder.Message(this.session)
+        //     .text(this.result.guide.filters[this.result.filterIndex].name)
+        //     .suggestedActions(
+        //         builder.SuggestedActions.create(
+        //                 this.session, 
+        //                 answers
+        //             ));
 
         this.session.send(msg);
     }
