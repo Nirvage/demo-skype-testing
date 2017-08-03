@@ -36,7 +36,7 @@ export class QuestionDialog {
             .textFormat(builder.TextFormat.xml)
             .attachments([
                 new builder.HeroCard(this.session)
-                    .text(this.session.userData.guide.filters[this.session.userData.currentFilter].name)
+                    .title(this.session.userData.guide.filters[this.session.userData.currentFilter].name)
                     .buttons(answers)
             ]);
 

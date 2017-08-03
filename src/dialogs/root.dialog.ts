@@ -15,7 +15,7 @@ export class RootDialog {
 
     sendGreetingShowHelp(){
         let card = new builder.HeroCard(this.session)
-            .text("Bonjour, je suis le bot lyreco.")
+            .subtitle("Bonjour, je suis le bot lyreco.")
             .images([
                  builder.CardImage.create(this.session, "https://s3-eu-west-1.amazonaws.com/th-prod/booth/0001/17/d055d3ba7fbba4a824379e75c56f88f3c97ae058.jpeg")
             ]);
@@ -29,7 +29,7 @@ export class RootDialog {
     }
 
     alwaysSayGoodbye(){
-        this.session.send("Ok... See you later!");
+        this.session.send("J'espère vous avoir rendu service, à la prochaine.");
     }
 
 }
