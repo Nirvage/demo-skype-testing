@@ -15,10 +15,15 @@ export class ProductService {
     filterProducts(categoryId: string, criterions: any[]): Promise<any> {
         return this.getProducts(categoryId)
         .then((products: any[]) => {
+
+            console.log(criterions);
+
             let selectedAttributes: any[] = [];
             criterions.forEach((criterion) => {
                 selectedAttributes.concat(criterion.selectedAttribute);
             });
+
+            console.log(selectedAttributes);
 
             return products.filter((product) => {
                 return selectedAttributes.every( (attribute: any) => {
