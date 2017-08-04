@@ -20,7 +20,7 @@ export class ProductService {
 
             let selectedAttributes: any[] = [];
             criterions.forEach((criterion) => {
-                selectedAttributes.concat(criterion.selectedAttribute);
+                selectedAttributes = selectedAttributes.concat(criterion.selectedAttribute);
             });
 
             console.log(selectedAttributes);

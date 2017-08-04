@@ -22,7 +22,6 @@ export class GuideDialog {
         .then((data: any[]) => {
 
             if(data.length>0) {
-                console.log(data);
                 this.session.send("J'ai trouvé ce guide pour vous aider a choisir : " + data[0].name)
                 
                 this.session.userData = {guide: data[0], currentFilter: 0, criterions: []};

@@ -19,8 +19,6 @@ export class QuestionDialog {
     }
 
     doQuestion(){
-        console.log(this.result);
-
         let answers: any[] = [];
         let select: string[] = [];
 
@@ -44,14 +42,6 @@ export class QuestionDialog {
                     .title(this.session.userData.guide.filters[this.session.userData.currentFilter].name)
                     .buttons(answers)
             ]);
-
-        // let msg = new builder.Message(this.session)
-        //     .text(this.result.guide.filters[this.result.filterIndex].name)
-        //     .suggestedActions(
-        //         builder.SuggestedActions.create(
-        //                 this.session, 
-        //                 answers
-        //             ));
 
         builder.Prompts.choice(this.session, msg, select);
     }
