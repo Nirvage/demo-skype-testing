@@ -79,11 +79,22 @@ export class QuestionDialog {
 
                 let cards: builder.HeroCard[] = [];
                 cards = products.map((product: any) => {
+                    let codeProductString = "" + product.code;
+                    let pad = "000000000000000000";
+                    let codeProductUrl = pad.substring(0, pad.length - codeProductString.length) + codeProductString;
+            
+                    let buttonUrl = "https://www.lyreco.com/webshop/FRFR/" + product.name.trim().replace(/ /g, '-')
+                        .replace(/[+]/g, '')
+                        .toLowerCase() + "-product-" + codeProductUrl + ".html";
+
                     return new builder.HeroCard(this.session)
-                        .title(product.name)
+                        .text(`#### ${product.name}`)
                         .images([
                             builder.CardImage.create(this.session, `http://assets.lyreco.com/is/image/lyrecows/2016-${product.code}?fit=constrain,1&wid=250&hei=250&fmt=jpg&locale=FR_fr`)
                         ])
+                        .buttons([
+                            builder.CardAction.openUrl(this.session, buttonUrl, "Aller à")
+                        ]);
                 });
                 let msg = new builder.Message(this.session)
                     .textFormat(builder.TextFormat.xml)
