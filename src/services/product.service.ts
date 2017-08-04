@@ -12,30 +12,22 @@ export class ProductService {
         return get();
     }
 
-    filterProducts(categoryId: string, criterions: any[]): Promise<any> {
-        console.log('1');
-
-        console.log('2');
+    async filterProducts(products: any[], criterions: any[]): Promise<any> {
         let selectedAttributes: any[] = [];
         criterions.forEach((criterion) => {
             selectedAttributes = selectedAttributes.concat(criterion.selectedAttribute);
         });
 
-        return this.getProducts(categoryId)
-            .then((products: any[]) => {                
-                console.log('3');
-                let productsF = products.filter((product) => {
-                    return selectedAttributes.every( (attribute: any) => {
-                        return product.attributes.some( (productAttribute: any) => {
-                            return attribute.att_id === productAttribute.id && attribute.values.some((value: any) => {
-                                return productAttribute.values.includes(value)
-                            })
-                        })
+        let productsF = products.filter((product) => {
+            return selectedAttributes.every((attribute: any) => {
+                return product.attributes.some((productAttribute: any) => {
+                    return attribute.att_id === productAttribute.id && attribute.values.some((value: any) => {
+                        return productAttribute.values.includes(value)
                     })
-                });
-                console.log('4');
-                return productsF;
-            });
+                })
+            })
+        });
+        return productsF;
     }
 
 }
