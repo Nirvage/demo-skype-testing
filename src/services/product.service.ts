@@ -17,10 +17,7 @@ export class ProductService {
         criterions.forEach((criterion) => {
             selectedAttributes = selectedAttributes.concat(criterion.selectedAttribute);
         });
-
-        console.log('selected attributes : ');
-        console.log(selectedAttributes);
-
+        
         let i = 0;
         let productsF = products.filter((product) => {
             console.log(product);
