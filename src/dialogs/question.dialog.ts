@@ -89,7 +89,6 @@ export class QuestionDialog {
                 cards = products.map((product: any) => {
                     return new builder.HeroCard(this.session)
                         .title(product.name)
-                        .subtitle(product.description)
                         .images([
                             builder.CardImage.create(this.session, `http://assets.lyreco.com/is/image/lyrecows/2016-${product.code}?fit=constrain,1&wid=250&hei=250&fmt=jpg&locale=FR_fr`)
                         ])
@@ -100,7 +99,7 @@ export class QuestionDialog {
                     .attachmentLayout(builder.AttachmentLayout.carousel)
                     .attachments(cards);
 
-                this.session.send("Voici les résultats que j'ai trouvé pour vos critères de recherche :")
+                this.session.send("Voici les résultats que j'ai trouvé pour vos critères de recherche : ( " + products.length + " )")
                     .endDialog(msg);
             } else {
                 this.session.endDialog("Aucun produit ne correspond à vos critères de recherche.");
