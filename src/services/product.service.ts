@@ -21,9 +21,8 @@ export class ProductService {
                 selectedAttributes = selectedAttributes.concat(criterion.selectedAttribute);
             });
 
-            return products.filter((product) => {
+            let productsF = products.filter((product) => {
                 return selectedAttributes.every( (attribute: any) => {
-                    console.log(attribute);
                     return product.attributes.some( (productAttribute: any) => {
                         return attribute.att_id === productAttribute.id && attribute.values.some((value: any) => {
                             return productAttribute.values.includes(value)
@@ -31,6 +30,10 @@ export class ProductService {
                     })
                 })
             });
+
+            console.log(productsF);
+
+            return productsF;
         });
     }
 
