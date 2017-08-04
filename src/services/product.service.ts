@@ -32,7 +32,11 @@ export class ProductService {
 
                 let attribute: any = attributes.find((productAttribute: any) => selectedAttribute.att_id == productAttribute.id);
 
-                return true;
+                if (attribute.values != undefined){
+                    return selectedAttribute.values.some((value: string) => attribute.values.includes(value));
+                }else {
+                    return false;
+                }
             });
             if (matched) {
                 console.log(product);
