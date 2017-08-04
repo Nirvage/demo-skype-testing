@@ -14,13 +14,15 @@ export class ProductService {
 
     filterProducts(categoryId: string, criterions: any[]): Promise<any> {
         console.log('1');
+
+        console.log('2');
+        let selectedAttributes: any[] = [];
+        criterions.forEach((criterion) => {
+            selectedAttributes = selectedAttributes.concat(criterion.selectedAttribute);
+        });
+
         return this.getProducts(categoryId)
-            .then((products: any[]) => {
-                console.log('2');
-                let selectedAttributes: any[] = [];
-                criterions.forEach((criterion) => {
-                    selectedAttributes = selectedAttributes.concat(criterion.selectedAttribute);
-                });
+            .then((products: any[]) => {                
                 console.log('3');
                 let productsF = products.filter((product) => {
                     return selectedAttributes.every( (attribute: any) => {
