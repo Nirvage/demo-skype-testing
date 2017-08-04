@@ -23,6 +23,7 @@ export class ProductService {
 
         let i = 0;
         let productsF = products.filter((product) => {
+            console.log(product);
             let matched: boolean;
             matched = selectedAttributes.every((attribute: any) => {
                 return product.attributes.some((productAttribute: any) => {
@@ -33,7 +34,6 @@ export class ProductService {
             });
             if (matched) {
                 i++;
-                console.log(product);
             }
             return matched;
         });
