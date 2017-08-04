@@ -16,6 +16,8 @@ export class ProductService {
         return this.getProducts(categoryId)
         .then((products: any[]) => {
 
+            console.log(products);
+
             let selectedAttributes: any[] = [];
             criterions.forEach((criterion) => {
                 selectedAttributes = selectedAttributes.concat(criterion.selectedAttribute);
@@ -30,8 +32,6 @@ export class ProductService {
                     })
                 })
             });
-
-            console.log(productsF);
 
             return productsF;
         });
