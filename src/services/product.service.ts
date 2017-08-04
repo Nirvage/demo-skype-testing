@@ -34,12 +34,21 @@ export class ProductService {
 
                 console.log('selectedAttribute : ');
                 console.log(selectedAttribute);
-
+                
                 console.log('productAttribute : ');
-                console.log(attribute);
+                
 
-                for (let value of selectedAttribute.values) {
-                    return attribute.values.includes(value);
+                if (attribute){
+                    for (let value of selectedAttribute.values) {
+                        if (attribute.values.includes(value)){
+                            console.log(attribute);
+                            return true;
+                        }else{
+                            return false;
+                        }
+                    }
+                }else{
+                    return false;
                 }
             });
             if (matched) {
