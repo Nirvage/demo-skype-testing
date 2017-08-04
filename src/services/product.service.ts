@@ -23,20 +23,11 @@ export class ProductService {
             
             let matched: boolean;
             matched = selectedAttributes.every((selectedAttribute: any) => {
-                // return product.attributes.some((productAttribute: any) => {
-                //     return attribute.att_id == productAttribute.id && attribute.values.some((value: string) => {
-                //         return productAttribute.values.includes(value)
-                //     })
-                // })
-                let attributes: any = product.attributes;
-
-                let attribute: any = attributes.find((productAttribute: any) => selectedAttribute.att_id == productAttribute.id);
-
-                if (attribute.values != undefined){
-                    return selectedAttribute.values.some((value: string) => attribute.values.includes(value));
-                }else {
-                    return false;
-                }
+                return product.attributes.some((productAttribute: any) => {
+                    return selectedAttribute.att_id == productAttribute.id && selectedAttribute.values.some((value: string) => {
+                        return productAttribute.values.includes(value)
+                    })
+                })
             });
             if (matched) {
                 console.log(product);
