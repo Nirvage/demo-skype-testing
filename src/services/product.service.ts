@@ -38,15 +38,15 @@ export class ProductService {
                 console.log('productAttribute : ');
                 
 
-                if (attribute){
-                    for (let value of selectedAttribute.values) {
+                if (attribute != undefined && attribute.values != undefined){
+                    let res = false;
+                    for (let value of selectedAttribute.values) {                        
                         if (attribute.values.includes(value)){
                             console.log(attribute);
-                            return true;
-                        }else{
-                            return false;
+                            res = true;
                         }
                     }
+                    return res;
                 }else{
                     return false;
                 }
