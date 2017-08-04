@@ -115,7 +115,7 @@ export class QuestionDialog {
                     .textFormat(builder.TextFormat.xml)
                     .attachments([card])
                 
-                builder.Prompts.confirm(this.session, 'Voulez-vous prendre rendez-vous avec un membre du service client ?');
+                builder.Prompts.choice(this.session, confirmMessage, ['oui', 'non']);
             } else {
                 this.session.endDialog("Aucun produit ne correspond à vos critères de recherche.");
             }
