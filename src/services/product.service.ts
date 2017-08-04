@@ -22,14 +22,15 @@ export class ProductService {
             });
 
             let productsF = products.filter((product) => {
-                return selectedAttributes.every( (attribute: any) => {
-                    return product.attributes.some( (productAttribute: any) => {
-                        console.log(productAttribute);
-                        return attribute.att_id === productAttribute.id && attribute.values.some((value: any) => {
-                            return productAttribute.values.includes(value)
-                        })
-                    })
-                })
+                return true;
+                // return selectedAttributes.every( (attribute: any) => {
+                //     return product.attributes.some( (productAttribute: any) => {
+                //         console.log(productAttribute);
+                //         return attribute.att_id === productAttribute.id && attribute.values.some((value: any) => {
+                //             return productAttribute.values.includes(value)
+                //         })
+                //     })
+                // })
             });
 
             return productsF;

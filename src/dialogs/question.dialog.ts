@@ -71,6 +71,8 @@ export class QuestionDialog {
 
         this.productService.filterProducts(categoryId, criterions)
         .then((products: any[]) => {
+            
+
             if (products.length>0) {
 
                 let cards: builder.HeroCard[] = [];
