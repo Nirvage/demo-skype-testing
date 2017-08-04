@@ -25,12 +25,14 @@ export class ProductService {
         let productsF = products.filter((product) => {
             console.log(product);
             let matched: boolean;
-            matched = selectedAttributes.some((attribute) => {
-                return product.attributes.some((productAttribute: any) => {
-                    return attribute.att_id == productAttribute.id && attribute.values.some((value: string) => {
-                        return productAttribute.values.includes(value)
-                    })
-                })
+            matched = selectedAttributes.every((selectedAttribute: any) => {
+                // return product.attributes.some((productAttribute: any) => {
+                //     return attribute.att_id == productAttribute.id && attribute.values.some((value: string) => {
+                //         return productAttribute.values.includes(value)
+                //     })
+                // })
+                let attribute = product.attributes.find((productAttribute: any) => selectedAttribute.att_id == productAttribute.id);
+                return attribute.values.includes(selectedAttribute.values);
             });
             if (matched) {
                 i++;
