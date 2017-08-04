@@ -102,11 +102,21 @@ export class QuestionDialog {
                     .attachments(cards);
 
                 this.session.send("Voici les résultats que j'ai trouvé pour vos critères de recherche : ( " + products.length + " )")
-                    .endDialog(msg);
+                    .send(msg)
+                
+                builder.Prompts.confirm(this.session, 'Voulez-vous prendre rendez-vous avec un membre du service client ?');
             } else {
                 this.session.endDialog("Aucun produit ne correspond à vos critères de recherche.");
             }
         });
+    }
+
+    visitResult(){
+        if (this.result.response){
+            this.session.endDialog('Vous serez recontacté sous peu.')
+        }else{
+            this.session.endDialog();
+        }
     }
 
 }
