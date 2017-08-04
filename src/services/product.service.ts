@@ -21,28 +21,23 @@ export class ProductService {
         console.log('selected attributes : ');
         console.log(selectedAttributes);
 
+        let i = 0;
         let productsF = products.filter((product) => {
-            console.log('Product : ');
-            console.log(product);
-            return selectedAttributes.every((attribute: any) => {
-                console.log('> selected attribute :');
-                console.log(attribute);
+            let matched: boolean;
+            matched = selectedAttributes.every((attribute: any) => {
                 return product.attributes.some((productAttribute: any) => {
-                    console.log('  > product attribute');
-                    console.log(productAttribute);
                     return attribute.att_id === productAttribute.id && attribute.values.some((value: any) => {
-                        console.log('    > value');
-                        console.log(value);
-                        if (productAttribute.values.includes(value)) {
-                            console.log('      > Le produit contient cette valeur');
-                        } else {
-                            console.log('      > Le produit ne contient pas cette valeur');
-                        }
                         return productAttribute.values.includes(value)
                     })
                 })
-            })
+            });
+            if (matched) {
+                i++;
+                console.log(product);
+            }
+            return matched;
         });
+        console.log(`${i} produits ont matchés.`);
         return productsF;
     }
 
