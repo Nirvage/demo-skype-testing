@@ -88,7 +88,7 @@ export class QuestionDialog {
                         .toLowerCase() + "-product-" + codeProductUrl + ".html";
 
                     return new builder.HeroCard(this.session)
-                        .text("product.name")
+                        .title(product.name)
                         .images([
                             builder.CardImage.create(this.session, `http://assets.lyreco.com/is/image/lyrecows/2016-${product.code}?fit=constrain,1&wid=250&hei=250&fmt=jpg&locale=FR_fr`)
                         ])
