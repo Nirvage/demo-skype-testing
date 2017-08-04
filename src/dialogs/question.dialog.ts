@@ -69,9 +69,10 @@ export class QuestionDialog {
         let categoryId: string = this.session.userData.guide.categoryId;
         let criterions: any[] = this.session.userData.criterions;
 
+        console.log('0');
         this.productService.filterProducts(categoryId, criterions)
         .then((products: any[]) => {
-            
+            console.log('5');
 
             if (products.length>0) {
 
@@ -83,7 +84,7 @@ export class QuestionDialog {
                             builder.CardImage.create(this.session, `http://assets.lyreco.com/is/image/lyrecows/2016-${product.code}?fit=constrain,1&wid=250&hei=250&fmt=jpg&locale=FR_fr`)
                         ])
                 });
-
+                console.log('6');
                 let msg = new builder.Message(this.session)
                     .textFormat(builder.TextFormat.xml)
                     .attachmentLayout(builder.AttachmentLayout.carousel)
@@ -92,6 +93,7 @@ export class QuestionDialog {
                 this.session.send("Voici les résultats que j'ai trouvé pour vos critères de recherche : ( " + products.length + " )")
                     .endDialog(msg);
             } else {
+                console.log('7');
                 this.session.endDialog("Aucun produit ne correspond à vos critères de recherche.");
             }
         });
