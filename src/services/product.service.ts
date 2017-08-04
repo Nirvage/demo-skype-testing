@@ -12,7 +12,7 @@ export class ProductService {
         return get();
     }
 
-    async filterProducts(products: any[], criterions: any[]): Promise<any> {
+    filterProducts(products: any[], criterions: any[]): any[] {
         let selectedAttributes: any[] = [];
         criterions.forEach((criterion) => {
             selectedAttributes = selectedAttributes.concat(criterion.selectedAttribute);
