@@ -39,7 +39,7 @@ export class Bot {
             (session, result) => new QuestionDialog(session, result).doQuestion(),
             (session, result, next) => new QuestionDialog(session, result, next).getResponse(),
             (session, result, next) => new QuestionDialog(session, result, next).displayResults(),
-            (session, result) => new QuestionDialog(session, result).displayResults()
+            (session, result) => new QuestionDialog(session, result).visitResult()
         ]);
 
     }
