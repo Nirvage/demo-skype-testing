@@ -37,7 +37,7 @@ export class ProductService {
                 
                 console.log('productAttribute : ');
                 
-
+                let check = false;
                 if (attribute != undefined && attribute.values != undefined){
                     let res = false;
                     for (let value of selectedAttribute.values) {                        
@@ -46,9 +46,16 @@ export class ProductService {
                             res = true;
                         }
                     }
+                    if(res){
+                        check = true;
+                    }
                     return res;
                 }else{
-                    return false;
+                    if (check){
+                        return true;
+                    }else {
+                        return false;
+                    }
                 }
             });
             if (matched) {
