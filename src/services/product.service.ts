@@ -20,7 +20,7 @@ export class ProductService {
 
         let i = 0;
         let productsF = products.filter((product) => {
-            console.log(product);
+            
             let matched: boolean;
             matched = selectedAttributes.every((selectedAttribute: any) => {
                 // return product.attributes.some((productAttribute: any) => {
@@ -31,12 +31,15 @@ export class ProductService {
                 let attributes: any = product.attributes;
 
                 let attribute: any = attributes.find((productAttribute: any) => selectedAttribute.att_id == productAttribute.id);
-                
+
+                console.log(selectedAttribute);
+
                 for (let value of selectedAttribute.values) {
                     return attribute.values.includes(value);
                 }
             });
             if (matched) {
+                console.log(product);
                 i++;
             }
             return matched;
