@@ -29,8 +29,8 @@ export class ProductService {
                 //     })
                 // })
                 let attribute: any = product.attributes.find((productAttribute: any) => selectedAttribute.att_id == productAttribute.id);
-                for (let value of attribute.values) {
-                    return selectedAttribute.values.includes(value);
+                for (let value of selectedAttribute.values) {
+                    return attribute.values.includes(value);
                 }
             });
             if (matched) {
