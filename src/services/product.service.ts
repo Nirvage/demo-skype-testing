@@ -25,9 +25,9 @@ export class ProductService {
         let productsF = products.filter((product) => {
             console.log(product);
             let matched: boolean;
-            matched = selectedAttributes.every((attribute: any) => {
+            matched = selectedAttributes.every((attribute) => {
                 return product.attributes.some((productAttribute: any) => {
-                    return attribute.att_id === productAttribute.id && attribute.values.some((value: any) => {
+                    return attribute.att_id == productAttribute.id && attribute.values.some((value: string) => {
                         return productAttribute.values.includes(value)
                     })
                 })
