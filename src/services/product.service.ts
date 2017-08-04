@@ -22,12 +22,12 @@ export class ProductService {
 
             return products.filter((product) => {
                 return selectedAttributes.every( (attribute: any) => {
-                    return product.attributes.some( (productAttribute: any) =>
-                        attribute.att_id === productAttribute.id && attribute.values.some((value: any) => {
+                    return product.attributes.some( (productAttribute: any) => {
+                        return attribute.att_id === productAttribute.id && attribute.values.some((value: any) => {
                             return productAttribute.values.includes(value)
                         })
-                    );
-                });
+                    })
+                })
             });
         });
     }
