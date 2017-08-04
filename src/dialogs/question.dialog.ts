@@ -103,6 +103,17 @@ export class QuestionDialog {
 
                 this.session.send("Voici les résultats que j'ai trouvé pour vos critères de recherche : ( " + products.length + " )")
                     .send(msg)
+
+                let card = new builder.HeroCard(this.session)
+                    .title('Voulez-vous prendre rendez-vous avec un membre du service client ?')
+                    .buttons([
+                        builder.CardAction.postBack(this.session, 'oui'),
+                        builder.CardAction.postBack(this.session, 'non')
+                    ]);
+
+                let confirmMessage = new builder.Message(this.session)
+                    .textFormat(builder.TextFormat.xml)
+                    .attachments([card])
                 
                 builder.Prompts.confirm(this.session, 'Voulez-vous prendre rendez-vous avec un membre du service client ?');
             } else {
@@ -112,7 +123,7 @@ export class QuestionDialog {
     }
 
     visitResult(){
-        if (this.result.response){
+        if (this.result.response == 'oui'){
             this.session.endDialog('Vous serez recontacté sous peu.')
         }else{
             this.session.endDialog();
