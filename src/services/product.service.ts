@@ -17,7 +17,7 @@ export class ProductService {
         criterions.forEach((criterion) => {
             selectedAttributes = selectedAttributes.concat(criterion.selectedAttribute);
         });
-        
+
         let i = 0;
         let productsF = products.filter((product) => {
             console.log(product);
@@ -28,8 +28,10 @@ export class ProductService {
                 //         return productAttribute.values.includes(value)
                 //     })
                 // })
-                let attribute = product.attributes.find((productAttribute: any) => selectedAttribute.att_id == productAttribute.id);
-                return attribute.values.includes(selectedAttribute.values);
+                let attribute: any = product.attributes.find((productAttribute: any) => selectedAttribute.att_id == productAttribute.id);
+                for (let value of attribute.values) {
+                    return selectedAttribute.values.includes(value);
+                }
             });
             if (matched) {
                 i++;
