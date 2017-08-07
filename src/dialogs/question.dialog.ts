@@ -47,8 +47,7 @@ export class QuestionDialog {
     }
 
     getResponse(){
-        console.log(this.result.response);
-        if (this.result.response.index < this.session.userData.guide.filters.length && this.result.response.index >= 0){
+        if (this.result.response.index < this.session.userData.guide.filters[this.session.userData.currentFilter].criterions.length && this.result.response.index >= 0){
 
             this.session.userData.criterions.push(
                 this.session.userData.guide.filters[this.session.userData.currentFilter].criterions[this.result.response.index]
