@@ -123,8 +123,9 @@ export class QuestionDialog {
     }
 
     visitResult(){
-        if (this.result.response == 'oui'){
-            this.session.endDialog('Vous serez recontacté sous peu.')
+        console.log(this.result);
+        if (this.result == 'oui'){
+            this.session.endDialog('Vous serez recontacté sous peu.');
         }else{
             this.session.endDialog();
         }
