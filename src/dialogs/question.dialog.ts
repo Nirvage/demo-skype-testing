@@ -47,6 +47,7 @@ export class QuestionDialog {
     }
 
     getResponse(){
+        console.log(this.result.response);
         if (this.result.response.index < this.session.userData.guide.filters.length && this.result.response.index >= 0){
 
             this.session.userData.criterions.push(
@@ -105,7 +106,7 @@ export class QuestionDialog {
                     .send(msg)
 
                 let card = new builder.HeroCard(this.session)
-                    .title('Voulez-vous prendre rendez-vous avec un membre du service client ?')
+                    .text('#### Voulez-vous prendre rendez-vous avec un membre du service client ?')
                     .buttons([
                         builder.CardAction.postBack(this.session, 'oui', 'Oui'),
                         builder.CardAction.postBack(this.session, 'non', 'Non')
@@ -123,8 +124,7 @@ export class QuestionDialog {
     }
 
     visitResult(){
-        console.log(this.result);
-        if (this.result == 'oui'){
+        if (this.result.response.entity == 'oui'){
             this.session.endDialog('Vous serez recontacté sous peu.');
         }else{
             this.session.endDialog();
