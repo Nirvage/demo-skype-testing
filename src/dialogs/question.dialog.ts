@@ -105,7 +105,7 @@ export class QuestionDialog {
                     .send(msg)
 
                 let card = new builder.HeroCard(this.session)
-                    .text('#### Voulez-vous prendre rendez-vous avec un membre du service client ?')
+                    .text('#### Souhaitez-vous prendre rendez-vous avec l\'un de nos vendeurs ?')
                     .buttons([
                         builder.CardAction.postBack(this.session, 'oui', 'Oui'),
                         builder.CardAction.postBack(this.session, 'non', 'Non')
